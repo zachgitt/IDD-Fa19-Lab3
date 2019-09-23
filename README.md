@@ -17,7 +17,7 @@ The values range from 0 is 1023. Thus there are 2^10 possible values which can b
 
 ## Part B. RGB LED
 **How might you use this with only the parts in your kit? Show us your solution.** <br>
-[![RGB LED Video](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/rgb_thumbnail.png](https://youtu.be/8cb9lj_1cPc)
+[![RGB LED Video](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/rgb_thumbnail.png)](https://youtu.be/8cb9lj_1cPc)
 
 ## Part C. Voltage Varying Sensors 
  
