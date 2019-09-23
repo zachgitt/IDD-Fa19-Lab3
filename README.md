@@ -9,8 +9,8 @@ Include your responses to the bold questions on your own fork of [this lab repor
 For this lab, we will be experimenting with a variety of sensors, sending the data to the Arduino serial monitor, writing data to the EEPROM of the Arduino, and then playing the data back.
 
 ## Part A.  Writing to the Serial Monitor
- 
-**a. Based on the readings from the serial monitor, what is the range of the analog values being read?**
+**a. Based on the readings from the serial monitor, what is the range of the analog values being read?** <br>
+The readings range from 0 to 1023.
  
 **b. How many bits of resolution does the analog to digital converter (ADC) on the Arduino have?**
 
