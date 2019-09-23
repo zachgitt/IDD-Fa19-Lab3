@@ -16,8 +16,8 @@ The readings range from 0 to 1023.
 The values range from 0 is 1023. Thus there are 2^10 possible values which can be represented using 10 bits.
 
 ## Part B. RGB LED
-
-**How might you use this with only the parts in your kit? Show us your solution.**
+**How might you use this with only the parts in your kit? Show us your solution.** <br>
+[RGB LED Video](https://youtu.be/8cb9lj_1cPc)
 
 ## Part C. Voltage Varying Sensors 
  
