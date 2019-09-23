@@ -22,20 +22,71 @@ The values range from 0 is 1023. Thus there are 2^10 possible values which can b
 ## Part C. Voltage Varying Sensors 
  
 ### 1. FSR, Flex Sensor, Photo cell, Softpot
+**a. What voltage values do you see from your force sensor?** <br>
+When resting the FSR is reading a little over 300 on the analog and when pressed it reads upto 1023. Because the analog ontput on the serial monitor is linearly related to voltage the voltage when the FSR is resting is 300/1023 = x/5. Therefore the voltage x = ~1.46V when the FSR is not pushed (aka lowest resistance), and 5V (highest resistance) when pushed. 
 
-**a. What voltage values do you see from your force sensor?**
+**b. What kind of relationship does the voltage have as a function of the force applied? (e.g., linear?)** <br>
+The relationship between resistance and voltage applied is linear as the serial monitor shows this relationship.
 
-**b. What kind of relationship does the voltage have as a function of the force applied? (e.g., linear?)**
+**c. Can you change the LED fading code values so that you get the full range of output voltages from the LED when using your FSR?** <br>
+```
+/*
+  Fade
 
-**c. Can you change the LED fading code values so that you get the full range of output voltages from the LED when using your FSR?**
+  This example shows how to fade an LED on pin 9 using the analogWrite()
+  function.
 
-**d. What resistance do you need to have in series to get a reasonable range of voltages from each sensor?**
+  The analogWrite() function uses PWM, so if you want to change the pin you're
+  using, be sure to use another PWM capable pin. On most Arduino, the PWM pins
+  are identified with a "~" sign, like ~3, ~5, ~6, ~9, ~10 and ~11.
 
-**e. What kind of relationship does the resistance have as a function of stimulus? (e.g., linear?)**
+  This example code is in the public domain.
+
+  http://www.arduino.cc/en/Tutorial/Fade
+*/
+
+int redPin = 11;           // the PWM pin the LED is attached to
+int greenPin = 10;
+int bluePin = 9;
+int brightness = 0;    // how bright the LED is
+int fadeAmount = 5;    // how many points to fade the LED by
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // declare pin 9 to be an output:
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // set the brightness of pin 9:
+  analogWrite(redPin, brightness);
+  analogWrite(greenPin, brightness);
+  analogWrite(bluePin, brightness);
+
+  // change the brightness for next time through the loop:
+  brightness = brightness + fadeAmount;
+
+  // reverse the direction of the fading at the ends of the fade:
+  if (brightness <= 0 || brightness >= 255) {
+    fadeAmount = -fadeAmount;
+  }
+  // wait for 30 milliseconds to see the dimming effect
+  delay(30);
+}
+```
+
+**d. What resistance do you need to have in series to get a reasonable range of voltages from each sensor?** <br>
+With some experimentation, 10kOhm has a high enough resistance to produce analog values near 300-400. Additional experimentation was done with 200kOhm and 660kOhm but the analog values showed at 1023.
+
+**e. What kind of relationship does the resistance have as a function of stimulus? (e.g., linear?)** <br>
+Given the relationship V=IR we know that resistance and voltage are linearly related.
 
 ### 2. Accelerometer
- 
-**a. Include your accelerometer read-out code in your write-up.**
+**a. Include your accelerometer read-out code in your write-up.** <br>
+
 
 ### 3. IR Proximity Sensor
 
