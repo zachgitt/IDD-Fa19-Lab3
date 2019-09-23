@@ -12,7 +12,8 @@ For this lab, we will be experimenting with a variety of sensors, sending the da
 **a. Based on the readings from the serial monitor, what is the range of the analog values being read?** <br>
 The readings range from 0 to 1023.
  
-**b. How many bits of resolution does the analog to digital converter (ADC) on the Arduino have?**
+**b. How many bits of resolution does the analog to digital converter (ADC) on the Arduino have?** <br>
+The values range from 0 is 1023. Thus there are 2^10 possible values which can be represented using 10 bits.
 
 ## Part B. RGB LED
 
