@@ -86,7 +86,7 @@ Given the relationship V=IR we know that resistance and voltage are linearly rel
 
 ### 2. Accelerometer
 **a. Include your accelerometer read-out code in your write-up.** <br>
-![Accelerometer LCD](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/accelerometer_lcd.jpeg)
+[![Accelerometer LED RGB](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/acc_thumbnail.png)](https://youtu.be/8cb9lj_1cPc)
 ```
 // Basic demo for accelerometer readings from Adafruit LIS3DH
 
@@ -113,6 +113,11 @@ Adafruit_LIS3DH lis = Adafruit_LIS3DH();
 // LCD
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
+// RGB
+int redPin = 9;
+int greenPin = 8;
+int bluePin = 7;
+
 void setup(void) {
 #ifndef ESP8266
   while (!Serial);     // will pause Zero, Leonardo, etc until serial console opens
@@ -134,6 +139,11 @@ void setup(void) {
   
   Serial.print("Range = "); Serial.print(2 << lis.getRange());  
   Serial.println("G");
+
+  // RGB
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
 }
 
 void loop() {
@@ -163,13 +173,36 @@ void loop() {
   lcd.print("Z: "); lcd.print(event.acceleration.z);
  
   delay(200); 
+
+  // RGB
+  if (event.acceleration.x > 8.0) {
+    setColor(255, 0, 0); // red
+  }
+  if (event.acceleration.y > 8.0) {
+    setColor(0, 255, 0); // green
+  }
+  if (event.acceleration.z > 8.0) {
+    setColor(0, 0, 255); // blue
+  }
+}
+
+void setColor(int red, int green, int blue)
+{
+  #ifdef COMMON_ANODE
+    red = 255 - red;
+    green = 255 - green;
+    blue = 255 - blue;
+  #endif
+  analogWrite(redPin, red);
+  analogWrite(greenPin, green);
+  analogWrite(bluePin, blue);  
 }
 ```
 
-## Optional. Graphic Display
+## Part E. Graphic Display
 **Take a picture of your screen working insert it here!** <br>
 
-## Part D. Logging values to the EEPROM and reading them back
+## Part F. Logging values to the EEPROM and reading them back
  
 ### 1. Reading and writing values to the Arduino EEPROM
 
@@ -189,6 +222,5 @@ void loop() {
  
 **a. Insert here a copy of your final state diagram.**
 
-### 3. Create your data logger!
- 
-**a. Record and upload a short demo video of your logger in action.**
+## Part G. Create your data logger!
+**a. Record and upload a short demo video of your logger in action.** <br>
