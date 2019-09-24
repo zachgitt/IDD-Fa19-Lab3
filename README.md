@@ -86,7 +86,7 @@ Given the relationship V=IR we know that resistance and voltage are linearly rel
 
 ### 2. Accelerometer
 **a. Include your accelerometer read-out code in your write-up.** <br>
-[Accelerometer LCD](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/accelerometer_lcd.jpeg)
+[!Accelerometer LCD](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/accelerometer_lcd.jpeg)
 ```
 // Basic demo for accelerometer readings from Adafruit LIS3DH
 
