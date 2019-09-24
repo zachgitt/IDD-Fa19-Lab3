@@ -23,10 +23,10 @@ The values range from 0 is 1023. Thus there are 2^10 possible values which can b
  
 ### 1. FSR, Flex Sensor, Photo cell, Softpot
 **a. What voltage values do you see from your force sensor?** <br>
-When resting the FSR is reading a little over 300 on the analog and when pressed it reads upto 1023. Because the analog ontput on the serial monitor is linearly related to voltage the voltage when the FSR is resting is 300/1023 = x/5. Therefore the voltage x = ~1.46V when the FSR is not pushed (aka lowest resistance), and 5V (highest resistance) when pushed. 
+When resting the FSR is reading 0 on the analog and when pressed it reads upto 1023. Because the analog ontput on the serial monitor is linearly related to voltage the voltage when the FSR is resting is 0V and when pressed is nearly 5V. 
 
 **b. What kind of relationship does the voltage have as a function of the force applied? (e.g., linear?)** <br>
-The relationship between resistance and voltage applied is linear as the serial monitor shows this relationship.
+When force is applied the voltage does not increase linearly. It increases at a smaller amount, therefore the square root of force is related to the voltage potential.
 
 **c. Can you change the LED fading code values so that you get the full range of output voltages from the LED when using your FSR?** <br>
 ```
@@ -79,14 +79,92 @@ void loop() {
 ```
 
 **d. What resistance do you need to have in series to get a reasonable range of voltages from each sensor?** <br>
-With some experimentation, 10kOhm has a high enough resistance to produce analog values near 300-400. Additional experimentation was done with 200kOhm and 660kOhm but the analog values showed at 1023.
+With some experimentation, 10kOhm in series with 6kOhm produces around 600 on the analog. 10kOhm with 12kOhm produced around 400. 10kOhm with 18kOhm produced around 300.
 
 **e. What kind of relationship does the resistance have as a function of stimulus? (e.g., linear?)** <br>
 Given the relationship V=IR we know that resistance and voltage are linearly related.
 
 ### 2. Accelerometer
 **a. Include your accelerometer read-out code in your write-up.** <br>
+[Accelerometer LCD](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/accelerometer_lcd.png)
+```
+// Basic demo for accelerometer readings from Adafruit LIS3DH
 
+#include <Wire.h>
+#include <SPI.h>
+#include <Adafruit_LIS3DH.h>
+#include <Adafruit_Sensor.h>
+#include <LiquidCrystal.h>
+
+// Used for software SPI
+#define LIS3DH_CLK 13
+#define LIS3DH_MISO 12
+#define LIS3DH_MOSI 11
+// Used for hardware & software SPI
+#define LIS3DH_CS 10
+
+// software SPI
+//Adafruit_LIS3DH lis = Adafruit_LIS3DH(LIS3DH_CS, LIS3DH_MOSI, LIS3DH_MISO, LIS3DH_CLK);
+// hardware SPI
+//Adafruit_LIS3DH lis = Adafruit_LIS3DH(LIS3DH_CS);
+// I2C
+Adafruit_LIS3DH lis = Adafruit_LIS3DH();
+
+// LCD
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+void setup(void) {
+#ifndef ESP8266
+  while (!Serial);     // will pause Zero, Leonardo, etc until serial console opens
+#endif
+
+  // LCD columns and rows
+  lcd.begin(16,2);
+
+  Serial.begin(9600);
+  Serial.println("LIS3DH test!");
+  
+  if (! lis.begin(0x18)) {   // change this to 0x19 for alternative i2c address
+    Serial.println("Couldnt start");
+    while (1);
+  }
+  Serial.println("LIS3DH found!");
+  
+  lis.setRange(LIS3DH_RANGE_4_G);   // 2, 4, 8 or 16 G!
+  
+  Serial.print("Range = "); Serial.print(2 << lis.getRange());  
+  Serial.println("G");
+}
+
+void loop() {
+  lis.read();      // get X Y and Z data at once
+  // Then print out the raw data
+  Serial.print("X:  "); Serial.print(lis.x); 
+  Serial.print("  \tY:  "); Serial.print(lis.y); 
+  Serial.print("  \tZ:  "); Serial.print(lis.z); 
+
+  /* Or....get a new sensor event, normalized */ 
+  sensors_event_t event; 
+  lis.getEvent(&event);
+  
+  /* Display the results (acceleration is measured in m/s^2) */
+  Serial.print("\t\tX: "); Serial.print(event.acceleration.x);
+  Serial.print(" \tY: "); Serial.print(event.acceleration.y); 
+  Serial.print(" \tZ: "); Serial.print(event.acceleration.z); 
+  Serial.println(" m/s^2 ");
+
+  Serial.println();
+
+  // LCD, set cursor to column0, line1
+  lcd.setCursor(0, 0);
+  lcd.print("X: "); lcd.print(event.acceleration.x);
+  lcd.print("Y: "); lcd.print(event.acceleration.y);
+  lcd.setCursor(0, 1);
+  lcd.print("Z: "); lcd.print(event.acceleration.z);
+ 
+  delay(200); 
+}
+```
 
 ### 3. IR Proximity Sensor
 
