@@ -306,18 +306,23 @@ void loop() {
 ## Part F. Logging values to the EEPROM and reading them back
  
 ### 1. Reading and writing values to the Arduino EEPROM
+**a. Does it matter what actions are assigned to which state? Why?** <br>
+No, the actions assigned to each state is arbitrary. State0 clears, state1 reads, and state2 writes. However each of these states can do anything they are defined to do. However there is a predefined order in this example.
 
-**a. Does it matter what actions are assigned to which state? Why?**
+**b. Why is the code here all in the setup() functions and not in the loop() functions?** <br>
+We have most of our code within setup for each state because we want it to only run once. Then each state has its own loop which does minimal amount of work for each loop.
 
-**b. Why is the code here all in the setup() functions and not in the loop() functions?**
+**c. How many byte-sized data samples can you store on the Atmega328?** <br>
+There are 1024 bytes to write to on the Atmega328.
 
-**c. How many byte-sized data samples can you store on the Atmega328?**
+**d. How would you get analog data from the Arduino analog pins to be byte-sized? How about analog data from the I2C devices?** <br>
+Arduino analog pins are 1024 values or 10 bits, so to convert to bytes or 8 bits we divide the values into 4 bytes. The I2C devices already communicate with byte size so don't need to be converted.
 
-**d. How would you get analog data from the Arduino analog pins to be byte-sized? How about analog data from the I2C devices?**
+**e. Alternately, how would we store the data if it were bigger than a byte? (hint: take a look at the [EEPROMPut](https://www.arduino.cc/en/Reference/EEPROMPut) example)** <br>
+You can store data based on multiple addresses on the EEPROM. 
 
-**e. Alternately, how would we store the data if it were bigger than a byte? (hint: take a look at the [EEPROMPut](https://www.arduino.cc/en/Reference/EEPROMPut) example)**
-
-**Upload your modified code that takes in analog values from your sensors and prints them back out to the Arduino Serial Monitor.**
+**Upload your modified code that takes in analog values from your sensors and prints them back out to the Arduino Serial Monitor.** <br>
+[Potentiometer Analog to Serial Monitor with EEPROM]()
 
 ### 2. Design your logger
  
