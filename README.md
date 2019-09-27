@@ -323,7 +323,7 @@ You can store data based on multiple addresses on the EEPROM.
 
 **Upload your modified code that takes in analog values from your sensors and prints them back out to the Arduino Serial Monitor.** <br>
 [Potentiometer Analog to Serial Monitor with EEPROM](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/SwitchState2.ino)
-![EEPROM Logging]()
+![EEPROM Logging](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/eeprom.png)
 
 ### 2. Design your logger
  
