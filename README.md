@@ -332,4 +332,5 @@ You can store data based on multiple addresses on the EEPROM.
 
 ## Part G. Create your data logger!
 **a. Record and upload a short demo video of your logger in action.** <br>
+I designed the potentiometer to write either x or y as 1 or 2 respectively to the EEPROM dependent on which accelerometer reading was higher when writing. And then when reading it would play 1 beep if x was written to the EEPROM or 2 beeps if y was written to the EEPROM. 
 [![Accelerometer Logger to Speaker](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/thumbnail.png)](https://youtu.be/hzdhDT0dEWw)
