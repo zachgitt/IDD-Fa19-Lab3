@@ -328,6 +328,8 @@ You can store data based on multiple addresses on the EEPROM.
 ### 2. Design your logger
  
 **a. Insert here a copy of your final state diagram.**
+![State Diagram](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/state_diagram.jpeg)
 
 ## Part G. Create your data logger!
 **a. Record and upload a short demo video of your logger in action.** <br>
+[![Accelerometer Logger to Speaker](https://github.com/zachgitt/IDD-Fa19-Lab3/blob/master/thumbnail.png)](https://youtu.be/hzdhDT0dEWw)
